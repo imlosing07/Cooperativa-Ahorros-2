@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v3/cargo")
@@ -31,6 +32,12 @@ public class CargoController {
     @GetMapping("/todos")
     public ResponseEntity<List<CargoDTO>> buscarTodos() {
         return ResponseEntity.status(HttpStatus.OK).body(cargoService.buscarTodos());
+    }
+
+    @GetMapping("/codigos")
+    public ResponseEntity<Map<Long, String>> buscarCodigos() {
+        Map<Long, String> codigosMap = cargoService.buscarCodigos();
+        return ResponseEntity.status(HttpStatus.OK).body(codigosMap);
     }
 
     @PutMapping("/{id}")

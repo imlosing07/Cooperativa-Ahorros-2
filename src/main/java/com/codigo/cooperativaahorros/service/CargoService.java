@@ -14,7 +14,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +46,14 @@ public class CargoService {
     @Transactional
     public List<CargoDTO> buscarTodos() {
         return cargoRepository.findAll().stream().map(this::convertirADTO).toList();
+    }
+
+    @Transactional
+    public Map<Long, String> buscarCodigos() {
+        // Aquí simulando un mapa con códigos y nombres
+        Map<Long, String> codigosMap = new HashMap<>();
+        buscarTodos().forEach(cargo -> codigosMap.put(cargo.getCargoCod(), cargo.getCargoNom()));
+        return codigosMap;
     }
 
     @Transactional
